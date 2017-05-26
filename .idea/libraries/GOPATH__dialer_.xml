@@ -1,0 +1,27 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;dialer&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../Users" />
+      <root url="file://$PROJECT_DIR$/../../../cloud.google.com" />
+      <root url="file://$PROJECT_DIR$/../../../tags2uml" />
+      <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../google.golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../pontest" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in" />
+    </CLASSES>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../Users" />
+      <root url="file://$PROJECT_DIR$/../../../cloud.google.com" />
+      <root url="file://$PROJECT_DIR$/../../../tags2uml" />
+      <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../google.golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../pontest" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>

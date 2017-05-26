@@ -1,0 +1,27 @@
+{
+	"ImportPath": "github.com/nemesisesq/dialer",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Comment": "v0.8.2-20-gab7e46e",
+			"Rev": "ab7e46ea22bd379e660230844f96d20f1dabc21a"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Comment": "v1.3.0-5-g599cba5",
+			"Rev": "599cba5e7b6137d46ddf58fb1765f5d928e69604"
+		},
+		{
+			"ImportPath": "github.com/joho/godotenv",
+			"Comment": "v1.1-5-gd10b3fb",
+			"Rev": "d10b3fbe007de7a25e086524ad17597afa3d238b"
+		},
+		{
+			"ImportPath": "github.com/urfave/negroni",
+			"Comment": "v0.2.0-104-gc0db5fe",
+			"Rev": "c0db5feaa33826cd5117930c8f4ee5c0f565eec6"
+		}
+	]
+}
