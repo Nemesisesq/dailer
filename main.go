@@ -92,7 +92,7 @@ func MakeCall(toNum string) (*http.Response, error) {
 	v := url.Values{}
 	v.Set("To", toNum)
 	v.Set("From", "+12164506822 ")
-	v.Set("Url", fmt.Sprintf(":%vcall"os.Getenv("SELF_URL"))
+	v.Set("Url", fmt.Sprintf(":%vcall",os.Getenv("SELF_URL")))
 	rb := *strings.NewReader(v.Encode())
 	// Create Client
 	client := &http.Client{
