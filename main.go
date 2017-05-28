@@ -91,14 +91,20 @@ func MakeCall(toNum string) (*http.Response, error) {
 	urlStr := fmt.Sprintf("https://api.twilio.com/2010-04-01/Accounts/%v/Calls", accountSid)
 	v := url.Values{}
 	v.Set("To", toNum)
-	v.Set("From", "+12164506822 ")
-	v.Set("Url", fmt.Sprintf(":%vcall",os.Getenv("SELF_URL")))
+	logrus.Info(toNum)
+	v.Set("From", "+12164506822")
+	call_in_number := fmt.Sprintf(":%vcall", os.Getenv("SELF_URL"))
+	logrus.Info(call_in_number)
+	v.Set("Url", call_in_number)
 	rb := *strings.NewReader(v.Encode())
 	// Create Client
 	client := &http.Client{
 		Timeout: time.Second * 20,
 	}
-	req, _ := http.NewRequest("POST", urlStr, &rb)
+	req, err := http.NewRequest("POST", urlStr, &rb)
+	if err != nil {
+		panic(err)
+	}
 	req.SetBasicAuth(accountSid, authToken)
 	req.Header.Add("Accept", "application/json")
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
@@ -133,7 +139,7 @@ func OneOff() {
 
 	c.AddFunc("0 0 4 * * 1-5", func() { MakeCall("+12165346715") })
 	c.AddFunc("@every 2h", func() { MakeCall("+12165346715") })
-	c.AddFunc("@every 5s", func() { logrus.Info("making call") })
+	//c.AddFunc("@every 5s", func() { logrus.Info("making call") })
 	//c.AddFunc("@hourly",      func() { fmt.Println("Every hour") })
 	//c.AddFunc("@every 1h30m", func() { fmt.Println("Every hour thirty") })
 	c.Start()
