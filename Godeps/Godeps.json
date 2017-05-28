@@ -19,6 +19,11 @@
 			"Rev": "d10b3fbe007de7a25e086524ad17597afa3d238b"
 		},
 		{
+			"ImportPath": "github.com/robfig/cron",
+			"Comment": "v1-58-g736158d",
+			"Rev": "736158dc09e10f1911ca3a1e1b01f11b566ce5db"
+		},
+		{
 			"ImportPath": "github.com/urfave/negroni",
 			"Comment": "v0.2.0-104-gc0db5fe",
 			"Rev": "c0db5feaa33826cd5117930c8f4ee5c0f565eec6"
