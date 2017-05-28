@@ -92,7 +92,7 @@ func MakeCall(toNum string) (*http.Response, error) {
 	v := url.Values{}
 	v.Set("To", toNum)
 	v.Set("From", "+12164506822 ")
-	v.Set("Url", "http://45b18348.ngrok.io/twiml")
+	v.Set("Url", os.Getenv("SELF_URL"))
 	rb := *strings.NewReader(v.Encode())
 	// Create Client
 	client := &http.Client{
@@ -129,7 +129,6 @@ func OneOff() {
 
 	c := cron.NewWithLocation(tz)
 
-
 	MakeCall("+12165346715")
 
 	c.AddFunc("0 0 4 * * 1-5", func() { MakeCall("+12165346715") })
@@ -154,5 +153,3 @@ func inspect(entries []*cron.Entry) {
 
 	}
 }
-
-
