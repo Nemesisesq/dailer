@@ -93,7 +93,7 @@ func MakeCall(toNum string) (*http.Response, error) {
 	v.Set("To", toNum)
 	logrus.Info(toNum)
 	v.Set("From", "+12164506822")
-	call_in_number := fmt.Sprintf("%vcall", os.Getenv("SELF_URL"))
+	call_in_number := fmt.Sprintf("%vtwiml", os.Getenv("SELF_URL"))
 	logrus.Info(call_in_number)
 	v.Set("Url", call_in_number)
 	rb := *strings.NewReader(v.Encode())
