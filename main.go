@@ -88,7 +88,7 @@ func MakeCall(toNum string) (*http.Response, error) {
 	accountSid := "AC8babac161b27ec214bed203884635819"
 	authToken := "5c575b32cf3208e7a86e849fd0cd697b"
 	//callSid := "PNbf2d127871ca9856d3d06e700edbf3a1"
-	urlStr := fmt.Sprintf("https://api.twilio.com/2010-04-01/Accounts/%v/Calls", accountSid)
+	urlStr := fmt.Sprintf("https://api.twilio.com/2010-04-01/Accounts/%v/Calls.json", accountSid)
 	v := url.Values{}
 	v.Set("To", toNum)
 	logrus.Info(toNum)
@@ -138,7 +138,7 @@ func OneOff() {
 	MakeCall("+12165346715")
 
 	c.AddFunc("0 0 4 * * 1-5", func() { MakeCall("+12165346715") })
-	c.AddFunc("@every 2h", func() { MakeCall("+12165346715") })
+	//c.AddFunc("@every 2h", func() { MakeCall("+12165346715") })
 	//c.AddFunc("@every 5s", func() { logrus.Info("making call") })
 	//c.AddFunc("@hourly",      func() { fmt.Println("Every hour") })
 	//c.AddFunc("@every 1h30m", func() { fmt.Println("Every hour thirty") })
