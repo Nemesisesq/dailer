@@ -44,7 +44,7 @@ func main() {
 
 func twiml(w http.ResponseWriter, r *http.Request) {
 	//twiml := TwiML{Say: "Lola, It's really important to wear warm clothes in the land. The land is a harsh place, a place full of sandwiches"}
-	twiml := TwiML{Play: "https://s3.us-east-2.amazonaws.com/sounds4nem/gary_v_rant_60_mins.mp3"}
+	twiml := TwiML{Play: "https://s3.us-east-2.amazonaws.com/sounds4nem/wake_up1.mp3"}
 
 	x, err := xml.MarshalIndent(twiml, "", "  ")
 	if err != nil {
@@ -135,9 +135,11 @@ func OneOff() {
 
 	c := cron.NewWithLocation(tz)
 
-	MakeCall("+12165346715")
+	//MakeCall("+12165346715")
 
-	c.AddFunc("0 0 4 * * 1-5", func() { MakeCall("+12165346715") })
+	c.AddFunc("0 0 5 * * 1-5", func() { MakeCall("+12165346715") })
+	c.AddFunc("0 40 5 * * 1-2", func() { MakeCall("+17408157640") })
+	c.AddFunc("0 0 7 * * 3-5", func() { MakeCall("+17408157640") })
 	//c.AddFunc("@every 2h", func() { MakeCall("+12165346715") })
 	//c.AddFunc("@every 5s", func() { logrus.Info("making call") })
 	//c.AddFunc("@hourly",      func() { fmt.Println("Every hour") })
