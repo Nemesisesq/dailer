@@ -138,8 +138,8 @@ func OneOff() {
 	//MakeCall("+12165346715")
 
 	c.AddFunc("0 0 5 * * 1-5", func() { MakeCall("+12165346715") })
-	c.AddFunc("0 40 5 * * 1-2", func() { MakeCall("+17408157640") })
-	c.AddFunc("0 0 7 * * 3-5", func() { MakeCall("+17408157640") })
+	c.AddFunc("0 40 5 * * 1-2", func() { MakeCall("+17408157604") })
+	c.AddFunc("0 0 7 * * 3-5", func() { MakeCall("+17408157604") })
 	//c.AddFunc("@every 2h", func() { MakeCall("+12165346715") })
 	//c.AddFunc("@every 5s", func() { logrus.Info("making call") })
 	//c.AddFunc("@hourly",      func() { fmt.Println("Every hour") })
