@@ -35,6 +35,7 @@ func main() {
 
 	r.HandleFunc("/twiml", twiml)
 	r.HandleFunc("/call", call)
+	r.HandleFunc("/bed", bedTwiml)
 	OneOff()
 
 	n.UseHandler(r)
@@ -45,6 +46,19 @@ func main() {
 func twiml(w http.ResponseWriter, r *http.Request) {
 	//twiml := TwiML{Say: "Lola, It's really important to wear warm clothes in the land. The land is a harsh place, a place full of sandwiches"}
 	twiml := TwiML{Play: "https://s3.us-east-2.amazonaws.com/sounds4nem/wake_up1.mp3"}
+
+	x, err := xml.MarshalIndent(twiml, "", "  ")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/xml")
+	w.Write(x)
+}
+
+func bedTwiml(w http.ResponseWriter, r *http.Request) {
+	twiml := TwiML{Say: "In order to get a good nights sleep you should go to bed now."}
+	//twiml := TwiML{Play: "https://s3.us-east-2.amazonaws.com/sounds4nem/wake_up1.mp3"}
 
 	x, err := xml.MarshalIndent(twiml, "", "  ")
 	if err != nil {
@@ -113,6 +127,35 @@ func MakeCall(toNum string) (*http.Response, error) {
 	return resp, err
 }
 
+func MakeBedCall(toNum string) (*http.Response, error) {
+	accountSid := "AC8babac161b27ec214bed203884635819"
+	authToken := "5c575b32cf3208e7a86e849fd0cd697b"
+	//callSid := "PNbf2d127871ca9856d3d06e700edbf3a1"
+	urlStr := fmt.Sprintf("https://api.twilio.com/2010-04-01/Accounts/%v/Calls.json", accountSid)
+	v := url.Values{}
+	v.Set("To", toNum)
+	logrus.Info(toNum)
+	v.Set("From", "+12164506822")
+	call_in_number := fmt.Sprintf("%vbed", os.Getenv("SELF_URL"))
+	logrus.Info(call_in_number)
+	v.Set("Url", call_in_number)
+	rb := *strings.NewReader(v.Encode())
+	// Create Client
+	client := &http.Client{
+		Timeout: time.Second * 20,
+	}
+	req, err := http.NewRequest("POST", urlStr, &rb)
+	if err != nil {
+		panic(err)
+	}
+	req.SetBasicAuth(accountSid, authToken)
+	req.Header.Add("Accept", "application/json")
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	// make request
+	resp, err := client.Do(req)
+	return resp, err
+}
+
 func caller() {
 	numbers := []string{
 		"+12163466385",
@@ -135,11 +178,21 @@ func OneOff() {
 
 	c := cron.NewWithLocation(tz)
 
-	//MakeCall("+12165346715")
-
+	//CARL
 	c.AddFunc("0 0 5 * * 1-5", func() { MakeCall("+12165346715") })
+
+	//ALLEN
 	c.AddFunc("0 40 5 * * 1-2", func() { MakeCall("+17408157604") })
 	c.AddFunc("0 0 7 * * 3-5", func() { MakeCall("+17408157604") })
+
+	//IAN
+	c.AddFunc("0 0 22 * * 1-5", func() { MakeBedCall("+14403969920") })
+	c.AddFunc("0 0 6 * * 1-5", func() { MakeCall("+14403969920") })
+
+	//GREG
+	c.AddFunc("0 0 22 * * 1-5", func() { MakeBedCall("+14403966613") })
+	c.AddFunc("0 0 6 * * 1-5", func() { MakeCall("+14403966613") })
+
 	//c.AddFunc("@every 2h", func() { MakeCall("+12165346715") })
 	//c.AddFunc("@every 5s", func() { logrus.Info("making call") })
 	//c.AddFunc("@hourly",      func() { fmt.Println("Every hour") })
