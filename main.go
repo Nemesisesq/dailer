@@ -58,6 +58,9 @@ func twiml(w http.ResponseWriter, r *http.Request) {
 
 func bedTwiml(w http.ResponseWriter, r *http.Request) {
 	twiml := TwiML{
+		Pause: TwimlPause{
+			Length: 1,
+		},
 		Say: TwiMLSay{
 			Value: "In order to get a good nights sleep you should go to bed now.",
 			Loop: 2,
@@ -83,10 +86,17 @@ type TwiMLSay struct {
 	Value    string   `xml:",chardata"`
 }
 
+type TwimlPause struct {
+	XMLName  xml.Name `xml:"Pause"`
+	Length int `xml:"length,attr"`
+}
+
 type TwiML struct {
 	XMLName xml.Name `xml:"Response"`
 
+	Pause TwimlPause `xml:"pause"`
 	Say  TwiMLSay `xml:",omitempty"`
+
 	Play string   `xml:",omitempty"`
 }
 
@@ -194,7 +204,7 @@ func OneOff() {
 
 	//CARL
 	c.AddFunc("0 0 5 * * 1-5", func() { MakeCall("+12165346715") })
-	c.AddFunc("0 23 * * 1-5", func() { MakeBedCall("+12165346715") })
+	c.AddFunc("0 0 23 * * 1-5", func() { MakeBedCall("+12165346715") })
 
 	//ALLEN
 	c.AddFunc("0 40 5 * * 1-2", func() { MakeCall("+17408157604") })
