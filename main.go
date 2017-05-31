@@ -180,17 +180,18 @@ func OneOff() {
 
 	//CARL
 	c.AddFunc("0 0 5 * * 1-5", func() { MakeCall("+12165346715") })
+	c.AddFunc("0 31 23 * * 1-5", func() { MakeBedCall("+12165346715") })
 
 	//ALLEN
 	c.AddFunc("0 40 5 * * 1-2", func() { MakeCall("+17408157604") })
 	c.AddFunc("0 0 7 * * 3-5", func() { MakeCall("+17408157604") })
 
 	//IAN
-	c.AddFunc("0 0 22 * * 1-5", func() { MakeBedCall("+14403969920") })
+	c.AddFunc("0 0 0 * * 1-5", func() { MakeBedCall("+14403969920") })
 	c.AddFunc("0 0 6 * * 1-5", func() { MakeCall("+14403969920") })
 
 	//GREG
-	c.AddFunc("0 0 22 * * 1-5", func() { MakeBedCall("+14403966613") })
+	c.AddFunc("0 0 0 * * 1-5", func() { MakeBedCall("+14403966613") })
 	c.AddFunc("0 0 6 * * 1-5", func() { MakeCall("+14403966613") })
 
 	//c.AddFunc("@every 2h", func() { MakeCall("+12165346715") })
