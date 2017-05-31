@@ -57,7 +57,13 @@ func twiml(w http.ResponseWriter, r *http.Request) {
 }
 
 func bedTwiml(w http.ResponseWriter, r *http.Request) {
-	twiml := TwiML{Say: "In order to get a good nights sleep you should go to bed now."}
+	twiml := TwiML{
+		Say: TwiMLSay{
+			Value: "In order to get a good nights sleep you should go to bed now.",
+			Loop: 2,
+			Voice: "alice",
+		},
+	}
 	//twiml := TwiML{Play: "https://s3.us-east-2.amazonaws.com/sounds4nem/wake_up1.mp3"}
 
 	x, err := xml.MarshalIndent(twiml, "", "  ")
@@ -69,11 +75,19 @@ func bedTwiml(w http.ResponseWriter, r *http.Request) {
 	w.Write(x)
 }
 
+type TwiMLSay struct {
+	XMLName  xml.Name `xml:"Say"`
+	Voice    string   `xml:"voice,attr"`
+	Language string   `xml:"language,attr"`
+	Loop     int      `xml:"loop,attr"`
+	Value    string   `xml:",chardata"`
+}
+
 type TwiML struct {
 	XMLName xml.Name `xml:"Response"`
 
-	Say  string `xml:",omitempty"`
-	Play string `xml:",omitempty"`
+	Say  TwiMLSay `xml:",omitempty"`
+	Play string   `xml:",omitempty"`
 }
 
 func call(w http.ResponseWriter, r *http.Request) {
@@ -180,7 +194,7 @@ func OneOff() {
 
 	//CARL
 	c.AddFunc("0 0 5 * * 1-5", func() { MakeCall("+12165346715") })
-	c.AddFunc("0 31 23 * * 1-5", func() { MakeBedCall("+12165346715") })
+	c.AddFunc("0 23 * * 1-5", func() { MakeBedCall("+12165346715") })
 
 	//ALLEN
 	c.AddFunc("0 40 5 * * 1-2", func() { MakeCall("+17408157604") })
