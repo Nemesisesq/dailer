@@ -46,7 +46,7 @@ func main() {
 
 func twiml(w http.ResponseWriter, r *http.Request) {
 	//twiml := TwiML{Say: "Lola, It's really important to wear warm clothes in the land. The land is a harsh place, a place full of sandwiches"}
-	twiml := TwiML{Play: "https://s3.us-east-2.amazonaws.com/sounds4nem/wake_up_2.mp3"}
+	twiml := TwiML{Play: "	https://s3.us-east-2.amazonaws.com/sounds4nem/wake_up_3.mp3"}
 
 	x, err := xml.MarshalIndent(twiml, "", "  ")
 	if err != nil {
