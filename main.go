@@ -37,6 +37,7 @@ func main() {
 	r.HandleFunc("/call", call)
 	r.HandleFunc("/bed", bedTwiml)
 	OneOff()
+	go MakeBedCall("+12165346715")
 
 	n.UseHandler(r)
 	logrus.Info("Listening on :" + port)
@@ -63,13 +64,14 @@ func bedTwiml(w http.ResponseWriter, r *http.Request) {
 		},
 		Say: TwiMLSay{
 			Value: "In order to get a good nights sleep you should go to bed now.",
-			Loop: 2,
+			Loop:  2,
 			Voice: "alice",
 		},
 	}
 	//twiml := TwiML{Play: "https://s3.us-east-2.amazonaws.com/sounds4nem/wake_up1.mp3"}
 
 	x, err := xml.MarshalIndent(twiml, "", "  ")
+	fmt.Println(x)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -87,17 +89,17 @@ type TwiMLSay struct {
 }
 
 type TwimlPause struct {
-	XMLName  xml.Name `xml:"Pause"`
-	Length int `xml:"length,attr"`
+	XMLName xml.Name `xml:"Pause"`
+	Length  int      `xml:"length,attr"`
 }
 
 type TwiML struct {
 	XMLName xml.Name `xml:"Response"`
 
-	Pause TwimlPause `xml:"pause"`
-	Say  TwiMLSay `xml:",omitempty"`
+	Pause TwimlPause `xml:",omitempty"`
+	Say   TwiMLSay   `xml:",omitempty"`
 
-	Play string   `xml:",omitempty"`
+	Play string `xml:",omitempty"`
 }
 
 func call(w http.ResponseWriter, r *http.Request) {
@@ -160,7 +162,7 @@ func MakeBedCall(toNum string) (*http.Response, error) {
 	v.Set("To", toNum)
 	logrus.Info(toNum)
 	v.Set("From", "+12164506822")
-	call_in_number := fmt.Sprintf("%vbed", os.Getenv("SELF_URL"))
+	call_in_number := fmt.Sprintf("%v/bed", os.Getenv("SELF_URL"))
 	logrus.Info(call_in_number)
 	v.Set("Url", call_in_number)
 	rb := *strings.NewReader(v.Encode())
