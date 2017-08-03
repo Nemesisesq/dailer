@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"github.com/robfig/cron"
@@ -211,6 +211,10 @@ func OneOff() {
 	//ALLEN
 	c.AddFunc("0 40 5 * * 1-2", func() { MakeCall("+17408157604") })
 	c.AddFunc("0 0 7 * * 3-5", func() { MakeCall("+17408157604") })
+
+	//CARL
+	c.AddFunc("0 40 5 * * 1-2", func() { MakeCall("+16146194020") })
+	c.AddFunc("0 0 7 * * 3-5", func() { MakeCall("+16146194020") })
 
 	//IAN
 	c.AddFunc("0 0 0 * * 1-5", func() { MakeBedCall("+14403969920") })
