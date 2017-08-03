@@ -1,1 +1,1 @@
-web: dialer
+web: dailer
