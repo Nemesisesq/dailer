@@ -1,0 +1,40 @@
+{
+	"ImportPath": "github.com/nemesisesq/dailer",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Comment": "v1.4.0-13-gac112f7",
+			"Rev": "ac112f7d75a0714af1bd86ab17749b31f7809640"
+		},
+		{
+			"ImportPath": "github.com/joho/godotenv",
+			"Comment": "v1.1-13-g3ddb279",
+			"Rev": "3ddb2792f3923947290c4932990136e17852a078"
+		},
+		{
+			"ImportPath": "github.com/robfig/cron",
+			"Comment": "v1-58-g736158d",
+			"Rev": "736158dc09e10f1911ca3a1e1b01f11b566ce5db"
+		},
+		{
+			"ImportPath": "github.com/sirupsen/logrus",
+			"Comment": "1.0.2-34-g181d419",
+			"Rev": "181d419aa9e2223811b824e8f0b4af96f9ba9302"
+		},
+		{
+			"ImportPath": "github.com/urfave/negroni",
+			"Comment": "v0.2.0-127-g3444e69",
+			"Rev": "3444e69ea1ef03a77998d11fc56e7f0a34f7213c"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/ssh/terminal",
+			"Rev": "358f15eacb587b056fc93273b930314a5cda12fe"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "e312636bdaa2fac4f0acde9d17ab9fbad2b4ad10"
+		}
+	]
+}
