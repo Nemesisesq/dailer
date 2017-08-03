@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
+	//"github.com/sirupsen/logrus"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"github.com/robfig/cron"
-	"github.com/sirupsen/logrus"
 	"github.com/urfave/negroni"
 )
 
@@ -40,7 +40,7 @@ func main() {
 	//go MakeBedCall("+12165346715")
 
 	n.UseHandler(r)
-	log.Info("Listening on :" + port)
+	////logrus.Info("Listening on :" + port)
 	http.ListenAndServe(":"+port, n)
 }
 
@@ -131,10 +131,10 @@ func MakeCall(toNum string) (*http.Response, error) {
 	urlStr := fmt.Sprintf("https://api.twilio.com/2010-04-01/Accounts/%v/Calls.json", accountSid)
 	v := url.Values{}
 	v.Set("To", toNum)
-	logrus.Info(toNum)
+	////logrus.Info(toNum)
 	v.Set("From", "+12164506822")
 	call_in_number := fmt.Sprintf("%v/twiml", os.Getenv("SELF_URL"))
-	logrus.Info(call_in_number)
+	////logrus.Info(call_in_number)
 	v.Set("Url", call_in_number)
 	rb := *strings.NewReader(v.Encode())
 	// Create Client
@@ -160,10 +160,10 @@ func MakeBedCall(toNum string) (*http.Response, error) {
 	urlStr := fmt.Sprintf("https://api.twilio.com/2010-04-01/Accounts/%v/Calls.json", accountSid)
 	v := url.Values{}
 	v.Set("To", toNum)
-	logrus.Info(toNum)
+	//logrus.Info(toNum)
 	v.Set("From", "+12164506822")
 	call_in_number := fmt.Sprintf("%v/bed", os.Getenv("SELF_URL"))
-	logrus.Info(call_in_number)
+	//logrus.Info(call_in_number)
 	v.Set("Url", call_in_number)
 	rb := *strings.NewReader(v.Encode())
 	// Create Client
@@ -189,7 +189,8 @@ func caller() {
 	}
 	for _, v := range numbers {
 		resp, _ := MakeCall(v)
-		logrus.Info(resp)
+		//logrus.Info(resp)
+		fmt.Println(resp)
 	}
 
 }
@@ -225,7 +226,7 @@ func OneOff() {
 	c.AddFunc("0 0 6 * * 1-5", func() { MakeCall("+14403966613") })
 
 	//c.AddFunc("@every 2h", func() { MakeCall("+12165346715") })
-	//c.AddFunc("@every 5s", func() { logrus.Info("making call") })
+	////c.AddFunc("@every 5s", func() { logrus.Info("making call") })
 	//c.AddFunc("@hourly",      func() { fmt.Println("Every hour") })
 	//c.AddFunc("@every 1h30m", func() { fmt.Println("Every hour thirty") })
 	c.Start()
@@ -241,7 +242,9 @@ func OneOff() {
 }
 func inspect(entries []*cron.Entry) {
 	for _, value := range entries {
-		logrus.Info(*value)
+		//logrus.Info(*value)
+
+		fmt.Println(value)
 
 	}
 }
