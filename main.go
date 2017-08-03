@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sirupsen/logrus"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"github.com/robfig/cron"
+	"github.com/sirupsen/logrus"
 	"github.com/urfave/negroni"
 )
 
@@ -40,7 +40,7 @@ func main() {
 	//go MakeBedCall("+12165346715")
 
 	n.UseHandler(r)
-	logrus.Info("Listening on :" + port)
+	log.Info("Listening on :" + port)
 	http.ListenAndServe(":"+port, n)
 }
 
