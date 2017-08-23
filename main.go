@@ -215,7 +215,7 @@ func OneOff() {
 
 	//CARL MCKINNEY
 	c.AddFunc("0 0 5 * * 1-5", func() { MakeCall("+16146194020") })
-	c.AddFunc("0 0 23 * * 1-5", func() { MakeCall("+16146194020") })
+	c.AddFunc("0 0 23 * * 1-5", func() { MakeBedCall("+16146194020") })
 
 	//IAN
 	c.AddFunc("0 0 0 * * 1-5", func() { MakeBedCall("+14403969920") })
